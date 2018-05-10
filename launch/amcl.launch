@@ -14,6 +14,10 @@
     <param name="global_frame_id" value="map"/>
     <param name="transform_tolerance" value="0.5"/>
     <param name="max_particles" value="2000"/>
+<!--
+    <rosparam file="$(find udacity_bot)/config/costmap_common_params.yaml" command="load" ns="global_costmap" />
+ -->
+	
 
     <param name="laser_model_type" value="likelihood_field"/>
     <param name="laser_z_hit" value="0.99"/>
@@ -50,6 +54,10 @@
     <remap from="odom" to="odom"/>
     <remap from="scan" to="udacity_bot/laser/scan"/>
 
+<!--
+    <param name="base_global_planner" type="string" value="navfn/NavfnROS" />
+    <param name="base_local_planner" value="base_local_planner/TrajectoryPlannerROS"/>
+-->
     <param name="base_global_planner" type="string" value="navfn/NavfnROS" />
     <param name="base_local_planner" value="base_local_planner/TrajectoryPlannerROS"/>
     <param name="controller_frequency" value="10.0" />
