@@ -14,9 +14,9 @@
       <mass value="15.0"/>
       <origin xyz="0 0 0" rpy=" 0 0 0"/>
       <inertia
-          ixx="0.2125" ixy="0" ixz="0"
-          iyy="0.0625" iyz="0"
-          izz="0.25"
+          ixx="0.365625" ixy="0" ixz="0"
+          iyy="0.365625" iyz="0"
+          izz="0.675"
       />
     </inertial>
     <collision name='chassis_collision'>
@@ -51,9 +51,9 @@
       <origin xyz="0 0 0" rpy=" 0 0 0"/>
       <mass value="2.0"/>
       <inertia
-          ixx="0.046" ixy="0" ixz="0"
-          iyy="0.046" iyz="0"
-          izz="0.025"
+          ixx="0.002" ixy="0" ixz="0"
+          iyy="0.002" iyz="0"
+          izz="0.002"
       />
     </inertial>
     <collision name='front_caster_collision'>
@@ -89,9 +89,9 @@
       <origin xyz="0 0 0" rpy="0 1.57 1.57"/> 
       <mass value="2.0"/>
       <inertia
-          ixx="0.046" ixy="0" ixz="0"
-          iyy="0.046" iyz="0"
-          izz="0.025"
+          ixx="0.00185" ixy="0" ixz="0"
+          iyy="0.00185" iyz="0"
+          izz="0.0025"
       />
     </inertial>
     <collision name='left_wheel_collision'>
@@ -117,9 +117,9 @@
       <origin xyz="0 0 0" rpy="0 1.57 1.57"/> 
       <mass value="2.0"/>
       <inertia
-          ixx="0.046" ixy="0" ixz="0"
-          iyy="0.046" iyz="0"
-          izz="0.025"
+          ixx="0.00185" ixy="0" ixz="0"
+          iyy="0.00185" iyz="0"
+          izz="0.0025"
       />
     </inertial>
     <collision name='right_wheel_collision'>
@@ -227,7 +227,7 @@
    </joint>
 
    <joint type="fixed" name="camera_joint">
-      <origin xyz="0.3 0 0" rpy=" 0 1.57 0"/>
+      <origin xyz="0.3 0 0" rpy="1.57 1.57 0"/>
       <parent link="chassis"/>
       <child link="camera"/>
    </joint>
