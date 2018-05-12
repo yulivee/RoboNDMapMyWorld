@@ -9,23 +9,6 @@
   <node pkg="amcl" type="amcl" name="amcl" output="screen">
     <remap from="scan" to="udacity_bot/laser/scan"/>
     <rosparam file="$(find udacity_bot)/config/amcl_params.yaml" command="load"/>
-	
-
-<!--
-    <param name="base_frame_id" value="robot_footprint"/>
-    <param name="global_frame_id" value="map"/>
-    <param name="odom_frame_id" value="odom"/>
-    <param name="odom_model_type" value="diff-corrected"/>
-    <param name="transform_tolerance" value="0.5"/>
-    <param name="max_particles" value="2000"/>
-
-    <param name="laser_model_type" value="likelihood_field"/>
-    <param name="laser_z_hit" value="0.99"/>
-    <param name="laser_z_rand" value="0.01"/>
- 
-    <param name="update_min_d" value="0.05" />
-    <param name="update_min_a" value="0.131"/>
--->
   </node>
 
 <!-- Move base -->
@@ -40,10 +23,6 @@
     <remap from="odom" to="odom"/>
     <remap from="scan" to="udacity_bot/laser/scan"/>
 
-<!--
-    <param name="base_global_planner" type="string" value="navfn/NavfnROS" />
-    <param name="base_local_planner" value="base_local_planner/TrajectoryPlannerROS"/>
--->
     <param name="base_global_planner" type="string" value="navfn/NavfnROS" />
     <param name="base_local_planner" value="base_local_planner/TrajectoryPlannerROS"/>
     <param name="controller_frequency" value="10.0" />
