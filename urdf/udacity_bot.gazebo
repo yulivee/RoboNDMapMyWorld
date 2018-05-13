@@ -8,7 +8,7 @@
       <updateRate>10</updateRate>
       <leftJoint>left_wheel_hinge</leftJoint>
       <rightJoint>right_wheel_hinge</rightJoint>
-      <wheelSeparation>0.3</wheelSeparation>
+      <wheelSeparation>0.4</wheelSeparation>
       <wheelDiameter>0.1</wheelDiameter>
       <torque>10</torque>
       <commandTopic>cmd_vel</commandTopic>
@@ -109,5 +109,14 @@
    <material>
     <script>Gazebo/DarkGrey</script>
    </material>
+ </gazebo>
+
+ <gazebo reference="chassis">
+   <material>
+    <script>Gazebo/Black</script>
+   </material>
+ </gazebo>
+	
+ <gazebo reference="robot_footprint">
  </gazebo>
 </robot>
