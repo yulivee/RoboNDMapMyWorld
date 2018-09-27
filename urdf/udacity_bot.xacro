@@ -178,7 +178,7 @@
 
   <link name="camera_link">
     <inertial>
-    <origin xyz="0 0 0" rpy=" 0 0 0"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
       <mass value="0.1"/>
       <inertia
           ixx="1e-6" ixy="0" ixz="0"
@@ -189,13 +189,14 @@
     <collision name='camera_collision'>
       <origin xyz="0 0 0" rpy=" 0 0 0"/> 
       <geometry>
-        <cylinder radius=".025" length=".025"/>
+        <box size="0.05 0.05 0.05"/>
       </geometry>
     </collision>
     <visual name='camera_visual'>
       <origin xyz="0 0 0" rpy=" 0 0 0"/>
       <geometry>
-        <cylinder radius=".025" length=".025"/>
+        <box size="0.05 0.05 0.05"/>
+        <!--<cylinder radius=".025" length=".025"/>-->
       </geometry>
     </visual>
       <material name="black_metal">
@@ -203,7 +204,7 @@
       </material>
   </link> 
 
-  <link name="camera_rgbd_frame" />
+  <link name="camera_link_optical" />
 
   <link name="hokuyo">
     <inertial>
@@ -275,15 +276,15 @@
    </joint>
 
    <joint type="fixed" name="camera_joint">
-      <origin xyz="0.3 0 0" rpy="0.075 1.57 0.075"/>
+      <origin xyz="0.3 0 0" rpy="0 0 0"/>
       <parent link="chassis"/>
       <child link="camera_link"/>
    </joint>
 
-   <joint type="fixed" name="rgbd_camera_joint">
-      <orign xyz="0 0 0" rpy="${-pi/2} 0 ${-pi/2}"/>
+   <joint type="fixed" name="camera_rgbd_joint">
+      <orign xyz="0.3 0 0" rpy="${-pi/2} 0 ${-pi/2}"/>
       <parent link="camera_link"/>
-      <child link="camera_rgbd_frame"/>
+      <child link="camera_link_optical"/>
    </joint>
 
    <joint type="fixed" name="hokuyo_joint">

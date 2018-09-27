@@ -1,6 +1,6 @@
-<?xml version="1.0"?>
-<launch>
+<?xml version="1.0" encoding="UTF-8"?>
 
+<launch>
 <include file="$(find udacity_bot)/launch/robot_description.launch"/>
 
   <arg name="world" default="empty"/> 
@@ -20,7 +20,6 @@
   </include>
 
 <!--spawn a robot in gazebo world -->
-
 <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" args="-urdf -param robot_description -model udacity_bot"/>
 
 </launch>
