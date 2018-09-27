@@ -1,7 +1,6 @@
 <?xml version='1.0'?>
 
 <robot name="udacity_bot" xmlns:xacro="http://www.ros.org/wiki/xacro">
-
 <xacro:include filename="$(find udacity_bot)/urdf/udacity_bot.gazebo" />
 
   <link name="robot_footprint">
@@ -177,7 +176,7 @@
     </visual>
   </link>
 
-  <link name="camera">
+  <link name="camera_link">
     <inertial>
     <origin xyz="0 0 0" rpy=" 0 0 0"/>
       <mass value="0.1"/>
@@ -203,6 +202,8 @@
 	<color rgba="0.1 0.1 0.1 1"/>
       </material>
   </link> 
+
+  <link name="camera_rgbd_frame" />
 
   <link name="hokuyo">
     <inertial>
@@ -276,7 +277,13 @@
    <joint type="fixed" name="camera_joint">
       <origin xyz="0.3 0 0" rpy="0.075 1.57 0.075"/>
       <parent link="chassis"/>
-      <child link="camera"/>
+      <child link="camera_link"/>
+   </joint>
+
+   <joint type="fixed" name="rgbd_camera_joint">
+      <orign xyz="0 0 0" rpy="${-pi/2} 0 ${-pi/2}"/>
+      <parent link="camera_link"/>
+      <child link="camera_rgbd_frame"/>
    </joint>
 
    <joint type="fixed" name="hokuyo_joint">
