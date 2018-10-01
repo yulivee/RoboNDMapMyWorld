@@ -12,11 +12,7 @@
     <inertial>
       <mass value="15.0"/>
       <origin xyz="0 0 -0.05" rpy="0 0 0"/>
-      <inertia
-          ixx="0.365625" ixy="0" ixz="0"
-          iyy="0.365625" iyz="0"
-          izz="0.675"
-      />
+      <inertia ixx="0.365625" ixy="0" ixz="0" iyy="0.365625" iyz="0" izz="0.675" />
     </inertial>
     <collision name='chassis_collision'>
       <origin xyz="0 0 .015" rpy=" 0 0 0"/> 
@@ -44,16 +40,19 @@
     </visual>
   </link>
 
+  <joint name="chassis" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <parent link="robot_footprint"/>
+    <child link="chassis" />
+  </joint>
+
+
   <link name='front_caster'>
     <pose>0 0 0 0 0 0</pose>
     <inertial>
       <origin xyz="0 0 0" rpy=" 0 0 0"/>
       <mass value="2.0"/>
-      <inertia
-          ixx="0.002" ixy="0" ixz="0"
-          iyy="0.002" iyz="0"
-          izz="0.002"
-      />
+      <inertia ixx="0.002" ixy="0" ixz="0" iyy="0.002" iyz="0" izz="0.002" />
     </inertial>
     <collision name='front_caster_collision'>
       <origin xyz="0 0 0" rpy=" 0 0 0"/>
@@ -81,6 +80,16 @@
       </material>
     </visual>
   </link>
+
+   <joint type="continuous" name="front_caster_hinge">
+       <origin xyz="0.2 0 -0.05" rpy="0 0 0"/>
+       <parent link="chassis"/>
+       <child link="front_caster"/>
+       <axis xyz="0 1 0" rpy="0 0 0"/>
+       <limit effort="10000" velocity="1000"/>
+       <joint_properties damping="1.0" friction="1.0"/>
+   </joint>
+
 
   <link name='back_caster'>
     <pose>0 0 0 0 0 0</pose>
@@ -120,16 +129,21 @@
     </visual>
   </link>
 
+   <joint type="continuous" name="back_caster_hinge">
+       <origin xyz="-0.2 0 -0.05" rpy="0 0 0"/>
+       <parent link="chassis"/>
+       <child link="back_caster"/>
+       <axis xyz="0 1 0" rpy="0 0 0"/>
+       <limit effort="10000" velocity="1000"/>
+       <joint_properties damping="1.0" friction="1.0"/>
+   </joint>
+
   <link name='left_wheel'>
     <pose>0 0 0 0 0 0</pose>
     <inertial>
       <origin xyz="0 0 0" rpy="0 1.57 1.57"/> 
       <mass value="2.0"/>
-      <inertia
-          ixx="0.00185" ixy="0" ixz="0"
-          iyy="0.00185" iyz="0"
-          izz="0.0025"
-      />
+      <inertia ixx="0.00185" ixy="0" ixz="0" iyy="0.00185" iyz="0" izz="0.0025" />
     </inertial>
     <collision name='left_wheel_collision'>
       <origin xyz="0 0 0" rpy="0 1.57 1.57"/> 
@@ -148,16 +162,21 @@
       </material>
   </link>
 
+   <joint type="continuous" name="left_wheel_hinge">
+       <origin xyz="0 0.2 -0.05" rpy="0 0 0"/>
+       <parent link="chassis"/>
+       <child link="left_wheel"/>
+       <axis xyz="0 1 0" rpy="0 0 0"/>
+       <limit effort="10000" velocity="1000"/>
+       <joint_properties damping="1.0" friction="1.0"/>
+   </joint>
+
   <link name='right_wheel'>
     <pose>0 0 0 0 0 0</pose>
     <inertial>
       <origin xyz="0 0 0" rpy="0 1.57 1.57"/> 
       <mass value="2.0"/>
-      <inertia
-          ixx="0.00185" ixy="0" ixz="0"
-          iyy="0.00185" iyz="0"
-          izz="0.0025"
-      />
+      <inertia ixx="0.00185" ixy="0" ixz="0" iyy="0.00185" iyz="0" izz="0.0025" />
     </inertial>
     <collision name='right_wheel_collision'>
       <origin xyz="0 0 0" rpy="0 1.57 1.57"/> 
@@ -176,15 +195,21 @@
     </visual>
   </link>
 
+   <joint type="continuous" name="right_wheel_hinge">
+       <origin xyz="0 -0.2 -0.05" rpy="0 0 0"/>
+       <parent link="chassis"/>
+       <child link="right_wheel"/>
+       <axis xyz="0 1 0" rpy="0 0 0"/>
+       <limit effort="10000" velocity="1000"/>
+       <joint_properties damping="1.0" friction="1.0"/>
+   </joint>
+
   <link name="camera_link">
-    <inertial>
     <origin xyz="0 0 0" rpy="0 0 0"/>
+    <inertial>
       <mass value="0.1"/>
-      <inertia
-          ixx="1e-6" ixy="0" ixz="0"
-          iyy="1e-6" iyz="0"
-          izz="1e-6"
-      />
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
     </inertial>
     <collision name='camera_collision'>
       <origin xyz="0 0 0" rpy=" 0 0 0"/> 
@@ -196,25 +221,35 @@
       <origin xyz="0 0 0" rpy=" 0 0 0"/>
       <geometry>
         <box size="0.05 0.05 0.05"/>
-        <!--<cylinder radius=".025" length=".025"/>-->
       </geometry>
     </visual>
-      <material name="black_metal">
-	<color rgba="0.1 0.1 0.1 1"/>
-      </material>
   </link> 
 
+   <joint type="fixed" name="camera_joint">
+      <origin xyz="0.3 0 0" rpy="0 0 0"/>
+      <child link="camera_link"/>
+      <parent link="chassis"/>
+      <axis xyz="0 1 0" rpy="0 0 0"/>
+    <!--
+    <limit effort="10000" velocity="1000"/>
+    <dynamics damping="1.0" friction="1.0"/>
+    -->
+   </joint>
+
   <link name="camera_link_optical" />
+
+   <joint type="fixed" name="camera_optical_joint">
+      <orign xyz="0.3 0 0" rpy="-1.5707 0 -1.5707"/>
+      <parent link="camera_link"/>
+      <child link="camera_link_optical"/>
+   </joint>
 
   <link name="hokuyo">
     <inertial>
       <mass value="0.1"/>
       <origin xyz="0.0 0 0" rpy=" 0 0 0"/>
       <inertia
-          ixx="1e-6" ixy="0" ixz="0"
-          iyy="1e-6" iyz="0"
-          izz="1e-6"
-      />
+          ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
     </inertial>
     <collision name='hokuyo_collision'>
       <origin xyz="0 0 0" rpy=" 0 0 0"/> 
@@ -232,60 +267,6 @@
 	<color rgba="0.1 0.1 0.1 1"/>
       </material>
   </link> 
-
-  <joint name="chassis" type="fixed">
-    <origin xyz="0 0 0" rpy="0 0 0" />
-    <parent link="robot_footprint"/>
-    <child link="chassis" />
-  </joint>
-
-   <joint type="continuous" name="front_caster_hinge">
-       <origin xyz="0.2 0 -0.05" rpy="0 0 0"/>
-       <parent link="chassis"/>
-       <child link="front_caster"/>
-       <axis xyz="0 1 0" rpy="0 0 0"/>
-       <limit effort="10000" velocity="1000"/>
-       <joint_properties damping="1.0" friction="1.0"/>
-   </joint>
-
-   <joint type="continuous" name="back_caster_hinge">
-       <origin xyz="-0.2 0 -0.05" rpy="0 0 0"/>
-       <parent link="chassis"/>
-       <child link="back_caster"/>
-       <axis xyz="0 1 0" rpy="0 0 0"/>
-       <limit effort="10000" velocity="1000"/>
-       <joint_properties damping="1.0" friction="1.0"/>
-   </joint>
-
-   <joint type="continuous" name="left_wheel_hinge">
-       <origin xyz="0 0.2 -0.05" rpy="0 0 0"/>
-       <parent link="chassis"/>
-       <child link="left_wheel"/>
-       <axis xyz="0 1 0" rpy="0 0 0"/>
-       <limit effort="10000" velocity="1000"/>
-       <joint_properties damping="1.0" friction="1.0"/>
-   </joint>
-
-   <joint type="continuous" name="right_wheel_hinge">
-       <origin xyz="0 -0.2 -0.05" rpy="0 0 0"/>
-       <parent link="chassis"/>
-       <child link="right_wheel"/>
-       <axis xyz="0 1 0" rpy="0 0 0"/>
-       <limit effort="10000" velocity="1000"/>
-       <joint_properties damping="1.0" friction="1.0"/>
-   </joint>
-
-   <joint type="fixed" name="camera_joint">
-      <origin xyz="0.3 0 0" rpy="0 0 0"/>
-      <parent link="chassis"/>
-      <child link="camera_link"/>
-   </joint>
-
-   <joint type="fixed" name="camera_rgbd_joint">
-      <orign xyz="0.3 0 0" rpy="${-pi/2} 0 ${-pi/2}"/>
-      <parent link="camera_link"/>
-      <child link="camera_link_optical"/>
-   </joint>
 
    <joint type="fixed" name="hokuyo_joint">
       <origin xyz="-0.2 0 0.16" rpy=" 0 0 0"/>
