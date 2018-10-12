@@ -3,7 +3,7 @@ This is the SLAM project of the Udacity Robotics Software Engineer Nanodegree.
 It uses Real-Time Appearance Based Mapping (RTAB-Map) in ROS to perform SLAM in a simulated environment. 
 
 # Writeup
-The writeup can be found in ``report/writeup.pdf``
+The writeup can be found in ``report/Map_My_World.pdf``  [click here to access the writeup](report/Map_My_World.pdf)
 
 ## Installation & Build
 ### ROS Kinetic
